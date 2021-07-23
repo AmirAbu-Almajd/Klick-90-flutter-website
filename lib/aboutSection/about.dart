@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:first_web_flutter/screens/main_screen.dart';
 import 'package:first_web_flutter/aboutSection/aboutPageText.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class aboutPage extends StatefulWidget {
   aboutPage({required Key key}) : super(key: key);
@@ -14,7 +13,6 @@ class aboutPage extends StatefulWidget {
 class aboutPageState extends State<aboutPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
-  late Animation _textMotionAnimation;
   late Animation _textFadingAnimation;
   late Animation<Offset> myOffset;
   late double _opacity = 0;
@@ -27,7 +25,12 @@ class aboutPageState extends State<aboutPage>
       });
     });
   }
-
+@override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.dispose();
+  }
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -38,8 +41,6 @@ class aboutPageState extends State<aboutPage>
     _textFadingAnimation = Tween<double>(begin: 0, end: 1).animate(_controller);
     myOffset = Tween<Offset>(begin: Offset(-1, 0), end: Offset.zero)
         .animate(_controller);
-    // _textMotionAnimation =
-    //     Tween<Offset>(begin: Offset(-1,0), end: Offset.zero).animate(_controller);
   }
 
   @override

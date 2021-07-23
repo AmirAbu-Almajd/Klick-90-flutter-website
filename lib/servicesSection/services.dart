@@ -2,7 +2,7 @@ import 'package:first_web_flutter/servicesSection/symbol.dart';
 import 'package:flutter/material.dart';
 
 Container servicePage(BuildContext context) {
-  List<int> dummyList = [1, 2, 3];
+  List<int> dummyList = [1,1,1];
   double width = MediaQuery.of(context).size.width;
   double height = MediaQuery.of(context).size.height;
   return Container(
@@ -17,7 +17,7 @@ Container servicePage(BuildContext context) {
         children: [
           Text("OUR SERVICES",
               style: TextStyle(
-                  fontFamily: 'Lemon Milk', fontSize: 40, color: Colors.white)),
+                  fontFamily: 'Renogare', fontSize: 40, color: Colors.white)),
           SizedBox(
             height: height * 0.032,
           ),

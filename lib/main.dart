@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         colorScheme: const ColorScheme(
           primary: Color.fromARGB(255, 237, 28, 36),
           primaryVariant: Colors.white,
-          secondary: Colors.red,
+          secondary: Color.fromARGB(255, 199, 193, 193),
           secondaryVariant: Colors.red,
           background: Colors.black,
           error: Colors.red,
