@@ -1,13 +1,11 @@
-import 'dart:async';
-
 import 'package:first_web_flutter/aboutSection/about.dart';
 import 'package:first_web_flutter/aboutSection/videoSection.dart';
 import 'package:first_web_flutter/appBar/appbar.dart';
 import 'package:first_web_flutter/carousel/carousel.dart';
 import 'package:first_web_flutter/servicesSection/services.dart';
+import 'package:first_web_flutter/statisticsSection/statistics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -15,7 +13,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class MainScreenState extends State<MainScreen> {
-  GlobalKey _key = GlobalKey();
+  static final GlobalKey _key = GlobalKey();
+  static final GlobalKey key2 = GlobalKey();
+  bool first = false, second = false;
   @override
   Widget build(BuildContext context) {
     ScrollController _scrollController = new ScrollController();
@@ -23,11 +23,19 @@ class MainScreenState extends State<MainScreen> {
       appBar: appBar(context, _scrollController),
       body: NotificationListener(
         onNotification: (t) {
-          if (_scrollController.position.pixels >= 860) {
+          if (_scrollController.position.pixels >= 860&& !first) {
             setState(() {
-              // aboutPage().
-              final aboutPageState _state =  _key.currentState as aboutPageState;
+              final aboutPageState _state = _key.currentState as aboutPageState;
               _state.startAnimating();
+              first = true;
+            });
+          } 
+          else if (_scrollController.position.pixels >= 2472&& !second) {
+            setState(() {
+              print("wasalna w rabbena");
+              final statisticsState _state= key2.currentState as statisticsState;
+              _state.startCounting();
+              second = true;
             });
           }
           print("${_scrollController.position.pixels}");
@@ -42,7 +50,10 @@ class MainScreenState extends State<MainScreen> {
               aboutPage(
                 key: _key,
               ),
-              servicePage(context)
+              servicePage(context),
+              statistics(
+                key: key2,
+              ),
             ],
           ),
         ),
@@ -52,11 +63,3 @@ class MainScreenState extends State<MainScreen> {
   }
 }
 
-class magic extends ChangeNotifier {
-  double show = 0;
-
-  void showValChange(double val) {
-    show = val;
-    notifyListeners();
-  }
-}
