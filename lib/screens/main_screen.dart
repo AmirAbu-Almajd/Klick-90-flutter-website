@@ -20,26 +20,24 @@ class MainScreenState extends State<MainScreen> {
   static final GlobalKey key2 = GlobalKey();
   bool first = false, second = false;
   ScrollController _scrollController = new ScrollController();
-  @override
-  void scrollCallBack(DragUpdateDetails dragUpdate) {
-    setState(() {
-      // Note: 3.5 represents the theoretical height of all my scrollable content. This number will vary for you.
-      _scrollController.position.moveTo(dragUpdate.globalPosition.dy*5);
-    });
+  double getScrollingPosition(double position) {
+    double height = MediaQuery.of(context).size.height;
+    return position / height;
   }
 
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: appBar(context, _scrollController),
       body: NotificationListener(
         onNotification: (t) {
-          if (_scrollController.position.pixels >= 860 && !first) {
+          if (_scrollController.position.pixels >= height*1.17 && !first) {
             setState(() {
               final aboutPageState _state = _key.currentState as aboutPageState;
               _state.startAnimating();
               first = true;
             });
-          } else if (_scrollController.position.pixels >= 2472 && !second) {
+          } else if (_scrollController.position.pixels >= height*3.28 && !second) {
             setState(() {
               final statisticsState _state =
                   key2.currentState as statisticsState;
@@ -48,11 +46,11 @@ class MainScreenState extends State<MainScreen> {
             });
           }
           // print("${_scrollController.position.pixels}");
+          print("${MediaQuery.of(context).size.height}");
           return true;
         },
         child: Stack(children: [
           SingleChildScrollView(
-
             controller: _scrollController,
             child: Column(
               children: [
@@ -73,7 +71,7 @@ class MainScreenState extends State<MainScreen> {
           // FlutterWebScroller(
           //   scrollCallBack,
           //   dragHandleColor: Colors.red.withOpacity(0.5),
-            
+
           // )
         ]),
       ),
@@ -81,5 +79,3 @@ class MainScreenState extends State<MainScreen> {
     );
   }
 }
-
-

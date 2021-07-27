@@ -26,22 +26,22 @@ AppBar appBar(BuildContext context, ScrollController scrollController) {
       semiButton(
           text: "KLICK WHO",
           scrollController: scrollController,
-          index: 689.85,
+          index: height*0.9161354582,
           externalContext: context),
       semiButton(
           text: "SERVICES",
           scrollController: scrollController,
-          index: 2079.703366163534,
+          index: height*2.761890261,
           externalContext: context),
       semiButton(
           text: "CLIENTS",
           scrollController: scrollController,
-          index: 3468.9754213700126,
+          index: height*4.60687307,
           externalContext: context),
       semiButton(
           text: "PROJECTS",
           scrollController: scrollController,
-          index: 4159.5838671875,
+          index: 5.52401576*height,
           externalContext: context),
       semiButton(
           text: "CONTACT",

@@ -36,7 +36,7 @@ class aboutPageState extends State<aboutPage>
     super.initState();
 
     _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 750));
 
     _textFadingAnimation = Tween<double>(begin: 0, end: 1).animate(_controller);
     myOffset = Tween<Offset>(begin: Offset(-1, 0), end: Offset.zero)
