@@ -9,7 +9,8 @@ AppBar appBar(BuildContext context, ScrollController scrollController) {
   return AppBar(
     bottom: PreferredSize(
         child: Container(
-          color: Theme.of(context).colorScheme.primary,
+          // color: Theme.of(context).colorScheme.primary,
+          color: Colors.green,
           height: height * 0.002,
         ),
         preferredSize: Size.fromHeight(4.0)),
