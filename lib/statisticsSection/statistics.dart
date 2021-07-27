@@ -1,10 +1,10 @@
+import 'package:first_web_flutter/statisticsSection/statistics_item.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
 
 class statistics extends StatefulWidget {
-  final String iconImage = "megaphone.png";
-  final String iconTitle = "Statistic";
+ 
   const statistics({Key? key}) : super(key: key);
 
   @override
@@ -17,8 +17,11 @@ class statisticsState extends State<statistics>
   late Animation countingAnimation;
   late Animation countingAnimation2;
   late Animation countingAnimation3;
+
   late Animation countingAnimation4;
   late List<int> countingValues = [232, 123, 545, 12];
+  late List<String> statisticsIcons = ["megaphone.png", "megaphone.png", "megaphone.png", "megaphone.png"];
+  late List<String> statisticsTitles = ["Social Campaigns", "Projects Finished", "Satisfied Clients", "Drunk Ideas"];
   void startCounting() {
     _controller.forward();
   }
@@ -61,146 +64,14 @@ class statisticsState extends State<statistics>
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/images/${widget.iconImage}",
-                    height: height * 0.1,
-                    width: width * 0.1,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  AnimatedBuilder(
-                    animation: countingAnimation,
-                    builder: (BuildContext context, _) {
-                      return new Text(
-                        countingAnimation.value.toString(),
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontFamily: 'Renogare',
-                            color: Colors.white),
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    widget.iconTitle,
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'Renogare',
-                        color: Colors.white),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/images/${widget.iconImage}",
-                    height: height * 0.1,
-                    width: width * 0.1,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  AnimatedBuilder(
-                    animation: countingAnimation2,
-                    builder: (BuildContext context, _) {
-                      return new Text(
-                        countingAnimation2.value.toString(),
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontFamily: 'Renogare',
-                            color: Colors.white),
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    widget.iconTitle,
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'Renogare',
-                        color: Colors.white),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/images/${widget.iconImage}",
-                    height: height * 0.1,
-                    width: width * 0.1,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  AnimatedBuilder(
-                    animation: countingAnimation3,
-                    builder: (BuildContext context, _) {
-                      return new Text(
-                        countingAnimation3.value.toString(),
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontFamily: 'Renogare',
-                            color: Colors.white),
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    widget.iconTitle,
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'Renogare',
-                        color: Colors.white),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    "assets/images/${widget.iconImage}",
-                    height: height * 0.1,
-                    width: width * 0.1,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  AnimatedBuilder(
-                    animation: countingAnimation4,
-                    builder: (BuildContext context, _) {
-                      return new Text(
-                        countingAnimation4.value.toString(),
-                        style: TextStyle(
-                            fontSize: 25,
-                            fontFamily: 'Renogare',
-                            color: Colors.white),
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text(
-                    widget.iconTitle,
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: 'Renogare',
-                        color: Colors.white),
-                  ),
-                ],
-              ),
+              statisticItem(context, statisticsIcons[0], statisticsTitles[0],
+                  countingAnimation),
+              statisticItem(context, statisticsIcons[1], statisticsTitles[1],
+                  countingAnimation2),
+              statisticItem(context, statisticsIcons[2], statisticsTitles[2],
+                  countingAnimation3),
+              statisticItem(context,  statisticsIcons[3], statisticsTitles[3],
+                  countingAnimation4),
             ],
           ),
         ),

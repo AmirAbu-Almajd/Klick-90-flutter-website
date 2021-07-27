@@ -1,6 +1,5 @@
 import 'package:first_web_flutter/screens/main_screen.dart';
 import 'package:flutter/material.dart';
-
 void main() {
   runApp(const MyApp());
 }
@@ -16,6 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primaryColor: Colors.white,
+        highlightColor: Color.fromARGB(255, 237, 28, 36),
         colorScheme: const ColorScheme(
           primary: Color.fromARGB(255, 237, 28, 36),
           primaryVariant: Colors.white,
@@ -45,10 +45,10 @@ class MyApp extends StatelessWidget {
               fontSize: 20,
               color: Color.fromARGB(255, 237, 28, 36)),
           bodyText1: TextStyle(
-              fontFamily: 'Renogare', fontSize: 18, color: Colors.black),
+              fontFamily: 'Renogare', fontSize: 10, color: Colors.black),
         ),
       ),
-      home: MainScreen(),
+      home:  MainScreen(),
     );
   }
 }

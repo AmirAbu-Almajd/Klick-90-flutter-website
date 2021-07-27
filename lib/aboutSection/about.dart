@@ -63,10 +63,10 @@ class aboutPageState extends State<aboutPage>
               child: Opacity(
                 // opacity: 1,
                 opacity: _textFadingAnimation.value,
-                child: Text(
+                child: SelectableText(
                   "WHO ARE THE KLICKERS?",
                   style: TextStyle(
-                      fontFamily: 'Lemon Milk',
+                      fontFamily: 'Renogare',
                       fontSize: 50,
                       color: Colors.red),
                   textAlign: TextAlign.start,

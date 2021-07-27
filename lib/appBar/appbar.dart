@@ -10,15 +10,12 @@ AppBar appBar(BuildContext context, ScrollController scrollController) {
     bottom: PreferredSize(
         child: Container(
           color: Theme.of(context).colorScheme.primary,
-          height: height * 0.001,
+          height: height * 0.002,
         ),
         preferredSize: Size.fromHeight(4.0)),
-    leadingWidth: width * 0.4,
     backgroundColor: Colors.black,
     leading: Image.asset(
       "assets/images/woodpecker.png",
-      width: width * 0.4,
-      height: height * 0.4,
     ),
     actions: [
       semiButton(
@@ -29,27 +26,27 @@ AppBar appBar(BuildContext context, ScrollController scrollController) {
       semiButton(
           text: "KLICK WHO",
           scrollController: scrollController,
-          index: 1,
+          index: 689.85,
           externalContext: context),
       semiButton(
           text: "SERVICES",
           scrollController: scrollController,
-          index: 3,
+          index: 2079.703366163534,
           externalContext: context),
       semiButton(
           text: "CLIENTS",
           scrollController: scrollController,
-          index: 4,
+          index: 3468.9754213700126,
           externalContext: context),
       semiButton(
           text: "PROJECTS",
           scrollController: scrollController,
-          index: 5,
+          index: 4159.5838671875,
           externalContext: context),
       semiButton(
           text: "CONTACT",
           scrollController: scrollController,
-          index: 6,
+          index: 7,
           externalContext: context),
     ],
   );

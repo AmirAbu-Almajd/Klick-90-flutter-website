@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class semiButton extends StatefulWidget {
   String text;
-  int index;
+  double index;
   ScrollController scrollController;
   BuildContext externalContext;
   bool hovered = false;
@@ -27,7 +27,7 @@ class _SemiButtonState extends State<semiButton>
   void initState() {
     super.initState();
     _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 10));
 
     _widthAnimation = Tween<double>(begin: 1, end: 2).animate(_controller);
     _borderAnimation = ColorTween(
@@ -43,63 +43,53 @@ class _SemiButtonState extends State<semiButton>
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    double adjustableMargin = width * 0.002;
+    double adjustableMargin = width * 0.009;
     double adjustableContainerWidth = width * 0.1;
     return Center(
-      child: Container(
-        width: adjustableContainerWidth,
-        height: height * 0.1,
-        child: MouseRegion(
-          cursor: (widget.hovered)
-              ? SystemMouseCursors.click
-              : SystemMouseCursors.basic,
-          onExit: (_) {
-            setState(() {
-              widget.hovered = false;
-              _controller.reverse();
-            });
-          },
-          onHover: (_) {
-            setState(() {
-              widget.hovered = true;
-              _controller.forward();
-            });
-          },
-          child: Center(
-            child: GestureDetector(
+      child: MouseRegion(
+        cursor: (widget.hovered)
+            ? SystemMouseCursors.click
+            : SystemMouseCursors.basic,
+        onExit: (_) {
+          setState(() {
+            widget.hovered = false;
+            _controller.reverse();
+          });
+        },
+        onHover: (_) {
+          setState(() {
+            widget.hovered = true;
+            _controller.forward();
+          });
+        },
+        child: Center(
+          child: GestureDetector(
               onTap: () {
-                widget.scrollController.animateTo((height * widget.index) - 57,
+                widget.scrollController.animateTo((widget.index),
                     duration: Duration(seconds: 1), curve: Curves.easeOut);
               },
-              child: (widget.hovered)
-                  ? AnimatedBuilder(
-                      animation: _controller,
-                      builder: (BuildContext context, _) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color:
-                                    _borderAnimation.value,
-                                width: _widthAnimation.value),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 7, horizontal: 11),
-                          child: Text(
-                            widget.text,
-                            style: Theme.of(context).textTheme.headline3,
-                            textAlign: TextAlign.center,
-                          ),
-                        );
-                      },
-                    )
-                  : Text(
+              child: AnimatedBuilder(
+                animation: _controller,
+                builder: (BuildContext context, _) {
+                  return Container(
+                    width: adjustableContainerWidth,
+                    // height: height * 0.1,
+                    // margin: EdgeInsets.symmetric(horizontal: adjustableMargin),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: _borderAnimation.value,
+                          width: _widthAnimation.value),
+                      borderRadius: BorderRadius.circular(7),
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: 7, horizontal: 11),
+                    child: Text(
                       widget.text,
-                      style: Theme.of(context).textTheme.headline1,
+                      style: Theme.of(context).textTheme.headline3,
                       textAlign: TextAlign.center,
                     ),
-            ),
-          ),
+                  );
+                },
+              )),
         ),
       ),
     );
