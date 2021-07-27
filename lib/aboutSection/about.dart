@@ -25,12 +25,14 @@ class aboutPageState extends State<aboutPage>
       });
     });
   }
-@override
+
+  @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
     _controller.dispose();
   }
+
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -60,17 +62,22 @@ class aboutPageState extends State<aboutPage>
           children: [
             SlideTransition(
               position: myOffset,
-              child: Opacity(
-                // opacity: 1,
-                opacity: _textFadingAnimation.value,
-                child: SelectableText(
-                  "WHO ARE THE KLICKERS?",
-                  style: TextStyle(
-                      fontFamily: 'Renogare',
-                      fontSize: 50,
-                      color: Colors.red),
-                  textAlign: TextAlign.start,
-                ),
+              child: AnimatedBuilder(
+                animation: _textFadingAnimation,
+                builder: (BuildContext context, _) {
+                  return Opacity(
+                    // opacity: 1,
+                    opacity: _textFadingAnimation.value,
+                    child: SelectableText(
+                      "WHO ARE THE KLICKERS?",
+                      style: TextStyle(
+                          fontFamily: 'Renogare',
+                          fontSize: 50,
+                          color: Colors.red),
+                      textAlign: TextAlign.start,
+                    ),
+                  );
+                },
               ),
             ),
             Container(
