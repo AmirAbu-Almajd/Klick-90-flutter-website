@@ -1,6 +1,6 @@
 import 'dart:js';
 
-import 'package:first_web_flutter/appbar/actions.dart';
+import '../appbar/actions.dart';
 import 'package:flutter/material.dart';
 
 AppBar appBar(BuildContext context, ScrollController scrollController) {
