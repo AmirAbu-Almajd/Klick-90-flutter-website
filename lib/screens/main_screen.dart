@@ -1,3 +1,5 @@
+import 'package:first_web_flutter/contactSection/contact_us.dart';
+
 import '../aboutSection/about.dart';
 import '../aboutSection/videoSection.dart';
 import '../appBar/appbar.dart';
@@ -65,6 +67,7 @@ class MainScreenState extends State<MainScreen> {
                 ),
                 clients(),
                 projects(),
+                ContactUs(),
               ],
             ),
           ),

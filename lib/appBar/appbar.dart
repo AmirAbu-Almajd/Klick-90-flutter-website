@@ -9,8 +9,8 @@ AppBar appBar(BuildContext context, ScrollController scrollController) {
   return AppBar(
     bottom: PreferredSize(
         child: Container(
-          // color: Theme.of(context).colorScheme.primary,
-          color: Colors.green,
+          color: Theme.of(context).colorScheme.primary,
+          // color: Colors.green,
           height: height * 0.002,
         ),
         preferredSize: Size.fromHeight(4.0)),
@@ -47,7 +47,7 @@ AppBar appBar(BuildContext context, ScrollController scrollController) {
       semiButton(
           text: "CONTACT",
           scrollController: scrollController,
-          index: 7,
+          index: height*7.7408959739311201082175385045512,
           externalContext: context),
     ],
   );
