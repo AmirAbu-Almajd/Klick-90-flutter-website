@@ -45,7 +45,7 @@ class _carouselState extends State<carousel> {
     //   }).toList(),
     // );
     return Container(
-      height: height * 0.92,
+      height: height - (height * 0.12),
       width: width,
       child: Center(
         child: Text("CAROUSEL WILL BE DISPLAYED HERE",

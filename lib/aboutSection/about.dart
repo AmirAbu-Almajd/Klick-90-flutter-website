@@ -54,7 +54,7 @@ class aboutPageState extends State<aboutPage>
       color: Colors.white,
       child: Container(
         width: width * 0.9,
-        height: height * 0.92,
+        height: height - (height * 0.12),
         padding: EdgeInsets.symmetric(
             vertical: height * 0.15, horizontal: width * 0.2),
         child: Column(

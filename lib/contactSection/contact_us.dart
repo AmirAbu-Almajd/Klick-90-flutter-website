@@ -33,7 +33,7 @@ class ContactUsState extends State<ContactUs> {
     double textFieldsWidth = width * 0.55;
     return Container(
       width: width * 0.9,
-      height: height * 0.92,
+      height: height - (height * 0.12),
       child: Column(
         children: [
           SizedBox(

@@ -13,7 +13,7 @@ class _videoSectionState extends State<videoSection> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Container(
-      height: height * 0.92,
+      height: height - (height * 0.12),
       width: width,
       child: Center(
         child: Text("VIDEO WILL BE DISPLAYED HERE",

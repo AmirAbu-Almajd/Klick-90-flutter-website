@@ -1,5 +1,6 @@
 import 'package:first_web_flutter/screens/main_screen.dart';
 import 'package:flutter/material.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -48,7 +49,7 @@ class MyApp extends StatelessWidget {
               fontFamily: 'Renogare', fontSize: 10, color: Colors.black),
         ),
       ),
-      home:  MainScreen(),
+      home: MainScreen(),
     );
   }
 }

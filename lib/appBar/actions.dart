@@ -27,7 +27,7 @@ class _SemiButtonState extends State<semiButton>
   void initState() {
     super.initState();
     _controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 10));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 0));
 
     _widthAnimation = Tween<double>(begin: 1, end: 2).animate(_controller);
     _borderAnimation = ColorTween(
@@ -44,7 +44,12 @@ class _SemiButtonState extends State<semiButton>
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double adjustableMargin = width * 0.009;
-    double adjustableContainerWidth = width * 0.1;
+    double adjustableContainerWidth = width * 0.09;
+    TextStyle buttonsStyle = TextStyle(
+        fontWeight: FontWeight.normal,
+        fontFamily: 'Renogare',
+        fontSize: 0.02 * height,
+        color: Colors.white);
     return Center(
       child: MouseRegion(
         cursor: (widget.hovered)
@@ -81,10 +86,10 @@ class _SemiButtonState extends State<semiButton>
                           width: _widthAnimation.value),
                       borderRadius: BorderRadius.circular(7),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: 7, horizontal: 11),
+                    padding: EdgeInsets.symmetric(vertical: height*0.009, horizontal: width*0.009),
                     child: Text(
                       widget.text,
-                      style: Theme.of(context).textTheme.headline3,
+                      style: buttonsStyle,
                       textAlign: TextAlign.center,
                     ),
                   );

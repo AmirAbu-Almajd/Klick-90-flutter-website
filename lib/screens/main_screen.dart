@@ -1,3 +1,4 @@
+import 'package:first_web_flutter/appBar/customAppbar.dart';
 import 'package:first_web_flutter/contactSection/contact_us.dart';
 
 import '../aboutSection/about.dart';
@@ -28,18 +29,22 @@ class MainScreenState extends State<MainScreen> {
   }
 
   Widget build(BuildContext context) {
+    print(
+        "Height:${MediaQuery.of(context).size.height}\nWidth:${MediaQuery.of(context).size.width}");
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: appBar(context, _scrollController),
+      // appBar: appBar(context, _scrollController),
+      appBar: customAppbar(context, _scrollController),
       body: NotificationListener(
         onNotification: (t) {
-          if (_scrollController.position.pixels >= height*1.17 && !first) {
+          if (_scrollController.position.pixels >= height * 1.17 && !first) {
             setState(() {
               final aboutPageState _state = _key.currentState as aboutPageState;
               _state.startAnimating();
               first = true;
             });
-          } else if (_scrollController.position.pixels >= height*3.28 && !second) {
+          } else if (_scrollController.position.pixels >= height * 3.28 &&
+              !second) {
             setState(() {
               final statisticsState _state =
                   key2.currentState as statisticsState;
@@ -47,8 +52,7 @@ class MainScreenState extends State<MainScreen> {
               second = true;
             });
           }
-          // print("${_scrollController.position.pixels}");
-          print("${MediaQuery.of(context).size.height}");
+          print("${_scrollController.position.pixels}");
           return true;
         },
         child: Stack(children: [

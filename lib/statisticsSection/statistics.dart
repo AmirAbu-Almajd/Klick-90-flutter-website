@@ -54,7 +54,7 @@ class statisticsState extends State<statistics>
           width: width,
         ),
         Container(
-          height: height * 0.92 - (height * 0.001),
+          height: height - (height * 0.12) - (height * 0.001),
           width: width,
           decoration: BoxDecoration(
               image: DecorationImage(

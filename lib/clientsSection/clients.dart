@@ -25,7 +25,7 @@ class _clientsState extends State<clients> {
     return Container(
         color: Colors.white,
         width: width,
-        height: height * 0.92,
+        height: height - (height * 0.12),
         child: Column(
           children: [
             SizedBox(
