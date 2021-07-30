@@ -28,32 +28,42 @@ class _clientState extends State<client> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return AnimatedBuilder(
-      animation: coloringAnimation,
-      builder: (BuildContext context, _) {
-        return MouseRegion(
-          onEnter: (_) {
-            _controller.forward();
+    return Row(
+      children: [
+        SizedBox(
+          width: height * 0.05,
+        ),
+        AnimatedBuilder(
+          animation: coloringAnimation,
+          builder: (BuildContext context, _) {
+            return MouseRegion(
+              onEnter: (_) {
+                _controller.forward();
+              },
+              onExit: (_) {
+                _controller.reverse();
+              },
+              child: Container(
+                height: height * 0.15,
+                width: height * 0.15,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                          "assets/images/${widget.clientImageName}",
+                        ),
+                        fit: BoxFit.fill)),
+                foregroundDecoration: BoxDecoration(
+                  color: coloringAnimation.value,
+                  backgroundBlendMode: BlendMode.saturation,
+                ),
+              ),
+            );
           },
-          onExit: (_) {
-            _controller.reverse();
-          },
-          child: Container(
-            height: height * 0.15,
-            width: height * 0.15,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      "assets/images/${widget.clientImageName}",
-                    ),
-                    fit: BoxFit.fill)),
-            foregroundDecoration: BoxDecoration(
-              color: coloringAnimation.value,
-              backgroundBlendMode: BlendMode.saturation,
-            ),
-          ),
-        );
-      },
+        ),
+        SizedBox(
+          width: height * 0.05,
+        ),
+      ],
     );
   }
 }

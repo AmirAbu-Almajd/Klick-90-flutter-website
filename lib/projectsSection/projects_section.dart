@@ -51,7 +51,7 @@ class projects extends StatelessWidget {
             ),
             SelectableText("LATEST PROJECTS",
                 style: TextStyle(
-                    fontFamily: 'Renogare', fontSize: 40, color: Colors.white)),
+                    fontFamily: 'Renogare', fontSize: 0.05 * height, color: Colors.white)),
             SizedBox(
               height: height * 0.04,
             ),

@@ -44,7 +44,7 @@ class _SemiButtonState extends State<semiButton>
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     double adjustableMargin = width * 0.009;
-    double adjustableContainerWidth = width * 0.09;
+    double adjustableContainerWidth = width * 0.075;
     TextStyle buttonsStyle = TextStyle(
         fontWeight: FontWeight.normal,
         fontFamily: 'Renogare',
@@ -86,7 +86,7 @@ class _SemiButtonState extends State<semiButton>
                           width: _widthAnimation.value),
                       borderRadius: BorderRadius.circular(7),
                     ),
-                    padding: EdgeInsets.symmetric(vertical: height*0.009, horizontal: width*0.009),
+                    padding: EdgeInsets.symmetric(vertical: height*0.009, horizontal: width*0.002),
                     child: Text(
                       widget.text,
                       style: buttonsStyle,

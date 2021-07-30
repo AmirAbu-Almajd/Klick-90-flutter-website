@@ -33,7 +33,7 @@ class _clientsState extends State<clients> {
             ),
             Text("LATEST CLIENTS",
                 style: TextStyle(
-                    fontFamily: 'Renogare', fontSize: 40, color: Colors.black)),
+                    fontFamily: 'Renogare', fontSize: 0.05 * height, color: Colors.black)),
             SizedBox(
               height: height * 0.04,
             ),

@@ -8,8 +8,8 @@ Container symbolFront(BuildContext context, String imageName , String serviceNam
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-            width: width * 0.2,
-            height: height * 0.2,
+            width: height * 0.35,
+            height: height * 0.31,
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("assets/images/${imageName}"),
@@ -18,7 +18,7 @@ Container symbolFront(BuildContext context, String imageName , String serviceNam
         Text(
           serviceName,
           style: TextStyle(
-              fontSize: 18, fontFamily: 'Renogare', color: Colors.white),
+              fontSize:  height*0.025, fontFamily: 'Renogare', color: Colors.white),
         ),
       ],
     ),
