@@ -1,19 +1,20 @@
+
 import 'package:first_web_flutter/appBar/customAppbar.dart';
 import 'package:first_web_flutter/contactSection/contact_us.dart';
+import 'package:first_web_flutter/custom_scrollbar.dart';
 
 import '../aboutSection/about.dart';
-import '../aboutSection/videoSection.dart';
-import '../appBar/appbar.dart';
 import '../carousel/carousel.dart';
 import '../clientsSection/clients.dart';
 import '../projectsSection/projects_section.dart';
 import '../servicesSection/services.dart';
 import '../statisticsSection/statistics.dart';
 import 'package:flutter/cupertino.dart';
-// import 'package:flutter_web_scrollbar/flutter_web_scrollbar.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
+  BuildContext externalContext;
+  MainScreen({required this.externalContext});
   @override
   MainScreenState createState() => MainScreenState();
 }
@@ -24,7 +25,7 @@ class MainScreenState extends State<MainScreen> {
   bool first = false, second = false;
   ScrollController _scrollController = new ScrollController();
   double getScrollingPosition(double position) {
-    double height = MediaQuery.of(context).size.height;
+    double height = MediaQuery.of(widget.externalContext).size.height;
     return position / height;
   }
 
@@ -37,13 +38,17 @@ class MainScreenState extends State<MainScreen> {
       appBar: customAppbar(context, _scrollController),
       body: NotificationListener(
         onNotification: (t) {
-          if (_scrollController.position.pixels >= height * 1.17 && !first) {
+          double currentPosition = _scrollController.position.pixels;
+          if (_scrollController.position.pixels >=
+                  (height * 0.2826316652715080950340739137709) &&
+              !first) {
             setState(() {
               final aboutPageState _state = _key.currentState as aboutPageState;
               _state.startAnimating();
               first = true;
             });
-          } else if (_scrollController.position.pixels >= height * 3.28 &&
+          } else if (_scrollController.position.pixels >=
+                  (height * 3.1170257335331277502469834328745) - height &&
               !second) {
             setState(() {
               final statisticsState _state =
@@ -52,36 +57,28 @@ class MainScreenState extends State<MainScreen> {
               second = true;
             });
           }
-          print("${_scrollController.position.pixels}");
+          print(currentPosition);
           return true;
         },
-        child: Stack(children: [
-          SingleChildScrollView(
-            controller: _scrollController,
-            child: Column(
-              children: [
-                carousel(),
-                videoSection(),
-                aboutPage(
-                  key: _key,
-                ),
-                servicePage(context),
-                statistics(
-                  key: key2,
-                ),
-                clients(),
-                projects(),
-                ContactUs(),
-              ],
+        child: ListView(
+          controller: _scrollController,
+          children: [
+            carousel(),
+            // videoSection(),
+            aboutPage(
+              key: _key,
             ),
-          ),
-          // FlutterWebScroller(
-          //   scrollCallBack,
-          //   dragHandleColor: Colors.red.withOpacity(0.5),
-
-          // )
-        ]),
+            servicePage(context),
+            statistics(
+              key: key2,
+            ),
+            clients(),
+            projects(),
+            ContactUs(externalContext: context),
+          ],
+        ),
       ),
+
       backgroundColor: Colors.black,
     );
   }

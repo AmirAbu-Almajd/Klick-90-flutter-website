@@ -44,12 +44,12 @@ class _clientState extends State<client> with SingleTickerProviderStateMixin {
                 _controller.reverse();
               },
               child: Container(
-                height: height * 0.15,
-                width: height * 0.15,
+                height: height * 0.17,
+                width: height * 0.17,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: AssetImage(
-                          "assets/images/${widget.clientImageName}",
+                          "assets/images/Final updated list of clients/${widget.clientImageName}",
                         ),
                         fit: BoxFit.fill)),
                 foregroundDecoration: BoxDecoration(

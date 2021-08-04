@@ -1,36 +1,59 @@
+import 'package:first_web_flutter/contactSection/contact_icon.dart';
+import 'package:first_web_flutter/contactSection/input_maker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class ContactUs extends StatefulWidget {
-  const ContactUs({Key? key}) : super(key: key);
+  BuildContext externalContext;
+  ContactUs({required this.externalContext});
 
   @override
   ContactUsState createState() => ContactUsState();
 }
 
-class ContactUsState extends State<ContactUs> {
-  MouseCursor myCursor = SystemMouseCursors.basic;
+class ContactUsState extends State<ContactUs>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation buttonColor;
+  late Animation borderColor;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController messageController = TextEditingController();
+  TextEditingController mobileController = TextEditingController();
+  late Animation textColor;
+  void printSomething() {
+    // if (nameController.text.isEmpty) print("yes it's empty");
+    print(nameController.text.toString());
+    // setState(() {
+    //   print(nameController.text.toString());
+    // });
+  }
 
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _controller =
+        AnimationController(vsync: this, duration: const Duration(seconds: 0));
+    buttonColor = ColorTween(
+            begin: Colors.black,
+            end: Theme.of(widget.externalContext).colorScheme.primary)
+        .animate(_controller);
+    textColor = ColorTween(
+            begin: Theme.of(widget.externalContext).colorScheme.primary,
+            end: Colors.white)
+        .animate(_controller);
+    borderColor = ColorTween(
+            begin: Theme.of(widget.externalContext).colorScheme.primary,
+            end: Colors.black)
+        .animate(_controller);
   }
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController nameController = new TextEditingController();
-    TextEditingController emailController = new TextEditingController();
-    TextEditingController messageController = new TextEditingController();
-    TextEditingController mobileController = new TextEditingController();
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    double mailingIconsWidth = height * 0.05;
-    double mailingIconsHeight = height * 0.05;
-
-    double textFieldsWidth = width * 0.55;
+    bool isDisabled = true;
     return Container(
       width: width * 0.9,
       height: height - (height * 0.12),
@@ -45,180 +68,82 @@ class ContactUsState extends State<ContactUs> {
                   fontSize: 40,
                   color: Theme.of(context).colorScheme.primary)),
           SizedBox(
-            height: height * 0.04,
+            height: height * 0.025,
           ),
-          Container(
-            width: textFieldsWidth,
-            child: TextField(
-              style: TextStyle(
-                  color: Colors.white, fontFamily: 'Renogare', fontSize: 20),
-              decoration: InputDecoration(
-                  hintText: "Name",
-                  hintStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontFamily: 'Renogare',
-                      fontSize: 20),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: height * 0.002,
-                  )),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: height * 0.002,
-                  ))),
-            ),
-          ),
-          SizedBox(
-            height: height * 0.03,
-          ),
-          Container(
-            width: textFieldsWidth,
-            child: TextField(
-              style: TextStyle(
-                  color: Colors.white, fontFamily: 'Renogare', fontSize: 20),
-              decoration: InputDecoration(
-                  hintText: "E-Mail",
-                  hintStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontFamily: 'Renogare',
-                      fontSize: 20),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: height * 0.002,
-                  )),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: height * 0.002,
-                  ))),
-            ),
-          ),
-          SizedBox(
-            height: height * 0.03,
-          ),
-          Container(
-            width: textFieldsWidth,
-            child: TextField(
-              style: TextStyle(
-                  color: Colors.white, fontFamily: 'Renogare', fontSize: 20),
-              decoration: InputDecoration(
-                  hintText: "Mobile",
-                  hintStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontFamily: 'Renogare',
-                      fontSize: 20),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: height * 0.002,
-                  )),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: height * 0.002,
-                  ))),
-            ),
+          inputFieldMaker(context, nameController, "Name"),
+          inputFieldMaker(context, emailController, "E-mail"),
+          inputFieldMaker(context, mobileController, "Mobile"),
+          inputFieldMaker(context, messageController, "Message"),
+          AnimatedBuilder(
+            animation: _controller,
+            builder: (BuildContext context, _) {
+              return MouseRegion(
+                onEnter: (_) {
+                  if (nameController.text.toString() != "" &&
+                      messageController.text.toString() != "" &&
+                      emailController.text.toString() != "" &&
+                      mobileController.text.toString() != "") {
+                    setState(() {
+                      isDisabled = false;
+                      print("State ${isDisabled.toString()}");
+                      _controller.forward();
+                    });
+                  }
+                },
+                onExit: (_) {
+                  setState(() {
+                    isDisabled = true;
+                  });
+                  _controller.reverse();
+                },
+                child: Container(
+                  width: width * 0.12,
+                  height: height * 0.09,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    border: Border.all(
+                        color: borderColor.value, width: height * 0.002),
+                  ),
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: buttonColor.value,
+                        onPrimary: Theme.of(context).colorScheme.primary,
+                      ),
+                      onPressed: isDisabled ? null : printSomething,
+                      // onPressed: () => printSomething(),
+                      child: Text(
+                        "Submit",
+                        style: TextStyle(
+                            fontFamily: 'Renogare',
+                            color: textColor.value,
+                            fontSize:
+                                height * 0.02631578947368421052631578947368),
+                      )),
+                ),
+              );
+            },
           ),
           SizedBox(
-            height: height * 0.03,
-          ),
-          Container(
-            width: width * 0.55,
-            height: height * 0.22,
-            child: TextField(
-              maxLines: 5,
-              style: TextStyle(
-                  color: Colors.white, fontFamily: 'Renogare', fontSize: 20),
-              decoration: InputDecoration(
-                  hintText: "Message",
-                  hintStyle: TextStyle(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontFamily: 'Renogare',
-                      fontSize: 20),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: height * 0.002,
-                  )),
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: height * 0.002,
-                  ))),
-            ),
-          ),
-          SizedBox(
-            height: height * 0.03,
+            height: height * 0.025,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            MouseRegion(
-              cursor: myCursor,
-              onHover: (_) {
-                setState(() {
-                  myCursor = SystemMouseCursors.click;
-                });
-              },
-              onExit: (_) {
-                setState(() {
-                  myCursor = SystemMouseCursors.basic;
-                });
-              },
-              child: GestureDetector(
-                onTap: () => _launchURL("https://www.facebook.com/Klick90"),
-                child: Image.asset(
-                  "assets/images/facebook.png",
-                  width: mailingIconsWidth,
-                  height: mailingIconsHeight,
-                ),
-              ),
+            iconButton(
+              iconName: "facebook.png",
+              url: "https://www.facebook.com/Klick90",
             ),
             SizedBox(
               width: width * 0.01,
             ),
-            MouseRegion(
-              cursor: myCursor,
-              onHover: (_) {
-                setState(() {
-                  myCursor = SystemMouseCursors.click;
-                });
-              },
-              onExit: (_) {
-                setState(() {
-                  myCursor = SystemMouseCursors.basic;
-                });
-              },
-              child: GestureDetector(
-                onTap: () => _launchURL("https://www.instagram.com/klick.90/"),
-                child: Image.asset(
-                  "assets/images/instagram.png",
-                  width: mailingIconsWidth,
-                  height: mailingIconsHeight,
-                ),
-              ),
+            iconButton(
+              iconName: "instagram.png",
+              url: "https://www.instagram.com/klick.90/",
             ),
             SizedBox(
               width: width * 0.01,
             ),
-            MouseRegion(
-              cursor: myCursor,
-              onHover: (_) {
-                setState(() {
-                  myCursor = SystemMouseCursors.click;
-                });
-              },
-              onExit: (_) {
-                setState(() {
-                  myCursor = SystemMouseCursors.basic;
-                });
-              },
-              child: Image.asset(
-                "assets/images/email.png",
-                width: mailingIconsWidth,
-                height: mailingIconsHeight,
-              ),
+            iconButton(
+              iconName: "email.png",
+              url: "https://www.instagram.com/klick.90/",
             ),
           ])
         ],

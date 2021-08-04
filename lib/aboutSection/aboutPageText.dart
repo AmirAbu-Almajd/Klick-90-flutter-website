@@ -3,38 +3,22 @@
 import 'package:flutter/material.dart';
 
 Column myTexts(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+  double height = MediaQuery.of(context).size.height;
 
   TextStyle descriptionTheme = TextStyle(
-              fontFamily: 'Renogare', fontSize: height*0.019, color: Colors.black);
+      height: height * 0.0024,
+      fontFamily: 'Renogare',
+      fontSize: height * 0.023,
+      color: Colors.black);
   return Column(
     children: [
       SizedBox(
-        height: height*0.02,
+        height: height * 0.02,
       ),
       Text(
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "We are redheaded, definitely hardheaded.\n\n You can see it, feel it and hear it! We’re the woodpeckers of Digital marketing. Strong, resilient and the best of what evolution had to offer the world. We created our own path and stuck to it! We create buzz wherever we are. We’re younger than your average agency and we’re damn proud of It, it gives us the resolve and the composure to always be on top! With passion, resilience, and wit, we figured out how to get things done. We’ve had our share of tough days but that's all behind us, we know what it is to be average because we used to be just that, but not anymore. Our team is built on a multitude of different characters, beliefs, and needs, but we only care about one thing, Passion. It’s what drives us to be who we are with the expertise to make your brand the best out there. We’ll tell you this thou. Everything starts with a Klick so welcome the world of Klick90!",
         style: descriptionTheme,
         textAlign: TextAlign.start,
-      ),
-      SizedBox(
-        height: height*0.02,
-      ),
-      Text(
-        "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        style: descriptionTheme,
-        textAlign: TextAlign.start,
-      ),
-      SizedBox(
-        height: height*0.02,
-      ),
-      Text(
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        style: descriptionTheme,
-        textAlign: TextAlign.start,
-      ),
-      SizedBox(
-        height: height*0.02,
       ),
     ],
     crossAxisAlignment: CrossAxisAlignment.start,

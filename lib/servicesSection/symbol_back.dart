@@ -12,7 +12,7 @@ Transform symbolBack(
     transform: Matrix4.rotationY(pi),
     alignment: Alignment.center,
     child: Container(
-      width: height * 0.35,
+      width: height * 0.43,
       height: height * 0.31,
       padding: EdgeInsets.all(15),
       decoration: BoxDecoration(
@@ -26,17 +26,24 @@ Transform symbolBack(
             Text(
               serviceName,
               style: TextStyle(
-                  fontSize: height*0.025, fontFamily: 'Renogare', color: Colors.white),
+                  fontSize: height * 0.025,
+                  fontFamily: 'Renogare',
+                  color: Colors.white),
               textAlign: TextAlign.center,
             ),
             SizedBox(
-              height: height*0.02,
+              height: height * 0.006,
             ),
             Text(
               serviceDescription,
-              style: TextStyle(
-                  fontSize: height*0.017, fontFamily: 'Renogare', color: Theme.of(context).colorScheme.secondary),
-              textAlign: TextAlign.center,
+            
+              style: TextStyle(  
+                
+                height: height*0.00162,
+                  fontSize: height * 0.0156,
+                  fontFamily: 'Renogare',
+                  color: Theme.of(context).colorScheme.secondary),
+              textAlign: TextAlign.justify,
             ),
           ],
         ),

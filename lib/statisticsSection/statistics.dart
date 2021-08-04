@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 
 class statistics extends StatefulWidget {
- 
   const statistics({Key? key}) : super(key: key);
 
   @override
@@ -19,9 +18,19 @@ class statisticsState extends State<statistics>
   late Animation countingAnimation3;
 
   late Animation countingAnimation4;
-  late List<int> countingValues = [232, 123, 545, 12];
-  late List<String> statisticsIcons = ["megaphone.png", "megaphone.png", "megaphone.png", "megaphone.png"];
-  late List<String> statisticsTitles = ["Social Campaigns", "Projects Finished", "Satisfied Clients", "Drunk Ideas"];
+  late List<int> countingValues = [34, 54, 69, 1000];
+  late List<String> statisticsIcons = [
+    "campaign icon.png",
+    "Projects finished final.png",
+    "client icon.png",
+    "drunk icon.png"
+  ];
+  late List<String> statisticsTitles = [
+    "Social Campaigns",
+    "Projects Finished",
+    "Satisfied Clients",
+    "Drunk Ideas"
+  ];
   void startCounting() {
     _controller.forward();
   }
@@ -54,10 +63,12 @@ class statisticsState extends State<statistics>
           width: width,
         ),
         Container(
-          height: height - (height * 0.12) - (height * 0.001),
+          height: height - (height * 0.12) + height * 0.001,
           width: width,
           decoration: BoxDecoration(
               image: DecorationImage(
+                  colorFilter: ColorFilter.mode(
+                      Colors.black.withOpacity(0.6), BlendMode.dstATop),
                   image: AssetImage("assets/images/statisticsBG.jpg"),
                   fit: BoxFit.cover)),
           child: Row(
@@ -70,7 +81,7 @@ class statisticsState extends State<statistics>
                   countingAnimation2),
               statisticItem(context, statisticsIcons[2], statisticsTitles[2],
                   countingAnimation3),
-              statisticItem(context,  statisticsIcons[3], statisticsTitles[3],
+              statisticItem(context, statisticsIcons[3], statisticsTitles[3],
                   countingAnimation4),
             ],
           ),

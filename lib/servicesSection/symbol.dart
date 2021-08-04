@@ -1,11 +1,16 @@
 import 'dart:math';
-
 import 'package:first_web_flutter/servicesSection/symbol_back.dart';
 import 'package:first_web_flutter/servicesSection/symbol_front.dart';
 import 'package:flutter/material.dart';
 
 class symbol extends StatefulWidget {
-  const symbol({Key? key}) : super(key: key);
+  final String serviceTitle;
+  final String serviceDescription;
+  final String serviceImage;
+  const symbol(
+      {required this.serviceTitle,
+      required this.serviceDescription,
+      required this.serviceImage});
 
   @override
   _symbolState createState() => _symbolState();
@@ -49,9 +54,9 @@ class _symbolState extends State<symbol> with SingleTickerProviderStateMixin {
             ..setEntry(3, 2, 0.002)
             ..rotateY(pi * _flippingAnimation.value),
           child: (_flippingAnimation.value >= 0.5)
-              ? symbolBack(context, "Symbol",
-                  "Lorem Ipsu It was popularised in rsions of Lorem Ipsum.")
-              : symbolFront(context,"symbol.png","Symbol")),
+              ? symbolBack(context, widget.serviceTitle,
+                  widget.serviceDescription)
+              : symbolFront(context, widget.serviceImage, widget.serviceTitle)),
     );
   }
 }

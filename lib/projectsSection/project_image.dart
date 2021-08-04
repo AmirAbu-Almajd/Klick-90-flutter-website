@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
 
-import 'image_dialog.dart';
-
 class project_image extends StatefulWidget {
   final String projectImageName;
-  final int zoomIndex;
+
   const project_image(
-      {required this.projectImageName, required this.zoomIndex, Key? key})
+      {required this.projectImageName, Key? key})
       : super(key: key);
 
   @override
@@ -42,7 +40,6 @@ class _project_imageState extends State<project_image>
       });
   }
 
-
   @override
   Widget build(BuildContext context) {
     // print(widget.zoomIndex);
@@ -57,21 +54,17 @@ class _project_imageState extends State<project_image>
           child: MouseRegion(
               onEnter: (_) {
                 _controller.forward();
-                // _controller2.forward();
               },
               onExit: (_) {
-                // if(_controller2.status == AnimationStatus.completed){
-                //   _controller2.reverse();
-                // }
                 _controller.reverse();
-                // _controller2.reverse();
               },
               child: GestureDetector(
                 onTap: () {
                   showDialog(
                       context: context,
                       builder: (buildContext) {
-                        return imageDialog(buildContext, widget.projectImageName);
+                        return imageDialog(
+                            buildContext, widget.projectImageName);
                       });
                   // (_controller2.status == AnimationStatus.completed)
                   //     ? _controller2.reverse()
@@ -88,19 +81,46 @@ class _project_imageState extends State<project_image>
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(
-                            "assets/images/${widget.projectImageName}",
+                            "assets/images/projects/${widget.projectImageName}",
                           ),
                           fit: BoxFit.fill)),
-
-                      child: Image.asset(
-                        "assets/images/${widget.projectImageName}",
-                        height: height * 0.15,
-                        width: height * 0.15,
-                      ),
+                  child: Image.asset(
+                    "assets/images/projects/${widget.projectImageName}",
+                    height: height * 0.15,
+                    width: height * 0.15,
+                  ),
                 ),
               )),
         );
       },
     );
   }
+}
+
+SimpleDialog imageDialog(BuildContext context, String imageName) {
+  double width = MediaQuery.of(context).size.width;
+  double height = MediaQuery.of(context).size.height;
+  return SimpleDialog(
+    backgroundColor: Colors.transparent,
+    // contentPadding: EdgeInsets.all( height * 0.002),
+    // shape: ContinuousRectangleBorder(
+    //   side: BorderSide(
+    //       color: Theme.of(context).colorScheme.primary, width: height * 0.002),
+    // ),
+    // title:
+    //     const Text('Choose a language', style: TextStyle(color: Colors.white)),
+    children: <Widget>[
+      Container(
+        height: height * 0.8,
+        width: height * 0.8,
+        decoration: BoxDecoration(
+            border: Border.all(
+                color: Theme.of(context).colorScheme.primary,
+                width: height * 0.002),
+            image: DecorationImage(
+                image: AssetImage("assets/images/projects/${imageName}"),
+                fit: BoxFit.fill)),
+      )
+    ],
+  );
 }

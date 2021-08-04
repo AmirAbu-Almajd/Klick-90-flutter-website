@@ -53,10 +53,11 @@ class aboutPageState extends State<aboutPage>
     return Container(
       color: Colors.white,
       child: Container(
-        width: width * 0.9,
+        width: width,
         height: height - (height * 0.12),
         padding: EdgeInsets.symmetric(
-            vertical: height * 0.15, horizontal: width * 0.2),
+          vertical: height * 0.15,horizontal: width*0.15
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -69,6 +70,7 @@ class aboutPageState extends State<aboutPage>
                     // opacity: 1,
                     opacity: _textFadingAnimation.value,
                     child: SelectableText(
+                      
                       "WHO ARE THE KLICKERS?",
                       style: TextStyle(
                           fontFamily: 'Renogare',

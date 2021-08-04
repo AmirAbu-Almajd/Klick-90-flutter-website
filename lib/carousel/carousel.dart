@@ -9,7 +9,20 @@ class carousel extends StatefulWidget {
 }
 
 class _carouselState extends State<carousel> {
-  List<String> caruouselImages = ['1.jpg', '2.jpg', '3.jpg', '4.jpg'];
+  List<AssetImage> caruouselImages = [
+    AssetImage('assets/images/Slider/1.jpg'),
+    AssetImage('assets/images/Slider/2.jpg'),
+    AssetImage('assets/images/Slider/3.jpg')
+  ];
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // for (int i = 0; i < caruouselImages.length; i++) {
+    //   precacheImage(caruouselImages[i], context);
+    // }
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -36,10 +49,8 @@ class _carouselState extends State<carousel> {
     //             width: width,
     //             margin: EdgeInsets.symmetric(horizontal: 5.0),
     //             decoration: BoxDecoration(
-    //                 color: Colors.amber,
-    //                 image: DecorationImage(
-    //                     image: AssetImage("assets/images/${i}"),
-    //                     fit: BoxFit.cover)));
+    //                 color: Colors.black,
+    //                 image: DecorationImage(image: i, fit: BoxFit.cover)));
     //       },
     //     );
     //   }).toList(),

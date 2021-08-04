@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
               fontFamily: 'Renogare', fontSize: 10, color: Colors.black),
         ),
       ),
-      home: MainScreen(),
+      home: MainScreen(externalContext: context,),
     );
   }
 }

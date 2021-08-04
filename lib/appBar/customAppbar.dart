@@ -25,8 +25,15 @@ PreferredSize customAppbar(
       child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
         Align(
           alignment: Alignment.centerLeft,
-          child: Image.asset(
-            "assets/images/woodpecker.png",
+          child: Row(
+            children: [
+              SizedBox(
+                width: width * 0.025,
+              ),
+              Image.asset(
+                "assets/images/woodpecker.png",
+              ),
+            ],
           ),
         ),
         Align(
@@ -40,28 +47,31 @@ PreferredSize customAppbar(
               semiButton(
                   text: "KLICK WHO",
                   scrollController: scrollController,
-                  index: height * 0.87787195874901150198485751416824,
+                  index: height * (0.88055942074683377531448575854407 + 0.03947368421052631578947368421053),
                   externalContext: context),
               semiButton(
                   text: "SERVICES",
                   scrollController: scrollController,
-                  index: height * 2.6845697312725529523571023267062,
+                  index: height * (0.03947368421052631578947368421053+ 1.8049437736752365969918802829712),
                   externalContext: context),
               semiButton(
                   text: "CLIENTS",
                   scrollController: scrollController,
-                  index: height * 4.4810718715624857209640380135,
+                  index: height * (0.03947368421052631578947368421053+3.6865066758295026411474480160415),
                   externalContext: context),
               semiButton(
                   text: "PROJECTS",
                   scrollController: scrollController,
-                  index: 5.3690455263725273967678903233195 * height,
+                  index: (0.03947368421052631578947368421053+4.9227842657884471058595533710181) * height,
                   externalContext: context),
               semiButton(
-                  text: "CONTACT",
+                  text: "CONTACT US",
                   scrollController: scrollController,
-                  index: height * 7.5812781369568700445177615064151,
+                  index: height * (0.03947368421052631578947368421053+7.5812781369568700445177615064151),
                   externalContext: context),
+              SizedBox(
+                width: width * 0.025,
+              )
             ],
           ),
         )
