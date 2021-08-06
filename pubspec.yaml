@@ -37,6 +37,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   url_launcher: ^5.7.10
   draggable_scrollbar: ^0.1.0
+  mailer: ^5.0.1
+  http: ^0.13.3
+  flutter_downloader: ^1.6.1
+  flowder: ^0.2.0
 
 
 dev_dependencies:

@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'package:first_web_flutter/contactSection/contact_icon.dart';
 import 'package:first_web_flutter/contactSection/input_maker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class ContactUs extends StatefulWidget {
   BuildContext externalContext;
@@ -15,18 +17,56 @@ class ContactUsState extends State<ContactUs>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation buttonColor;
-  late Animation borderColor;
+  // late Animation borderColor;
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController messageController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
   late Animation textColor;
-  void printSomething() {
-    // if (nameController.text.isEmpty) print("yes it's empty");
-    print(nameController.text.toString());
-    // setState(() {
-    //   print(nameController.text.toString());
-    // });
+  String userEmail = 'amirelbe7ar4@gmail.com';
+  String password = 'heroicmail';
+  String recepientEmail = 'karim@klick90.com';
+  dynamic buttonFunction = null;
+  void isEmpty() {
+    if (nameController.text.toString() != "" &&
+        messageController.text.toString() != "" &&
+        emailController.text.toString() != "" &&
+        mobileController.text.toString() != "") {
+      _controller.forward();
+      setState(() {
+        buttonFunction = sendEmail;
+      });
+    } else if (_controller.status == AnimationStatus.completed &&
+        (nameController.text.toString() == "" ||
+            messageController.text.toString() == "" ||
+            emailController.text.toString() == "" ||
+            mobileController.text.toString() == "")) {
+      _controller.reverse();
+      setState(() {
+        buttonFunction = null;
+      });
+    }
+  }
+
+  Future sendEmail() async {
+    final serviceId = 'service_iet9bfu';
+    final templateId = 'template_hu6zygm';
+    final userId = 'user_UrKhr588oouKsVa1yrWkd';
+    final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+    final response = await http.post(url,
+        body: json.encode({
+          'service_id': serviceId,
+          'template_id': templateId,
+          'user_id': userId,
+          'template_params': {
+            'user_email': emailController.text,
+            'user_name': nameController.text,
+            'user_mobile': mobileController.text,
+            'user_message': messageController.text,
+          }
+        }),
+        headers: {'Content-Type': 'application/json'});
+    print(response.body);
   }
 
   @override
@@ -43,10 +83,10 @@ class ContactUsState extends State<ContactUs>
             begin: Theme.of(widget.externalContext).colorScheme.primary,
             end: Colors.white)
         .animate(_controller);
-    borderColor = ColorTween(
-            begin: Theme.of(widget.externalContext).colorScheme.primary,
-            end: Colors.black)
-        .animate(_controller);
+    // borderColor = ColorTween(
+    //         begin: Theme.of(widget.externalContext).colorScheme.primary,
+    //         end: Colors.black)
+    //     .animate(_controller);
   }
 
   @override
@@ -65,64 +105,52 @@ class ContactUsState extends State<ContactUs>
           Text("BE A KLICKER!",
               style: TextStyle(
                   fontFamily: 'Renogare',
-                  fontSize: height*0.05307855798283337579985133209071,
+                  fontSize: height * 0.05307855798283337579985133209071,
                   color: Theme.of(context).colorScheme.primary)),
           SizedBox(
             height: height * 0.025,
           ),
-          inputFieldMaker(context, nameController, "Name"),
-          inputFieldMaker(context, emailController, "E-mail"),
-          inputFieldMaker(context, mobileController, "Mobile"),
-          inputFieldMaker(context, messageController, "Message"),
+          inputFieldMaker(
+              notificationFunction: isEmpty,
+              fieldController: nameController,
+              placeholderText: "Name"),
+          inputFieldMaker(
+              notificationFunction: isEmpty,
+              fieldController: emailController,
+              placeholderText: "E-mail"),
+          inputFieldMaker(
+              notificationFunction: isEmpty,
+              fieldController: mobileController,
+              placeholderText: "Mobile"),
+          inputFieldMaker(
+              notificationFunction: isEmpty,
+              fieldController: messageController,
+              placeholderText: "Message"),
           SizedBox(
             height: height * 0.015,
           ),
           AnimatedBuilder(
             animation: _controller,
             builder: (BuildContext context, _) {
-              return MouseRegion(
-                onEnter: (_) {
-                  if (nameController.text.toString() != "" &&
-                      messageController.text.toString() != "" &&
-                      emailController.text.toString() != "" &&
-                      mobileController.text.toString() != "") {
-                    setState(() {
-                      isDisabled = false;
-                      print("State ${isDisabled.toString()}");
-                      _controller.forward();
-                    });
-                  }
-                },
-                onExit: (_) {
-                  setState(() {
-                    isDisabled = true;
-                  });
-                  _controller.reverse();
-                },
-                child: Container(
-                  width: width * 0.12,
-                  height: height * 0.09,
-                  decoration: BoxDecoration(
-                    color: buttonColor.value,
-                    borderRadius: BorderRadius.circular(6.5),
-                    border: Border.all(
-                        color: borderColor.value, width: height * 0.002),
-                  ),
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        onPrimary: Theme.of(context).colorScheme.primary,
-                      ),
-                      onPressed: isDisabled ? null : printSomething,
-                      // onPressed: () => printSomething(),
-                      child: Text(
-                        "Submit",
-                        style: TextStyle(
-                            fontFamily: 'Renogare',
-                            color: textColor.value,
-                            fontSize:
-                                height * 0.02631578947368421052631578947368),
-                      )),
+              return Container(
+                width: width * 0.12,
+                height: height * 0.09,
+                decoration: BoxDecoration(
+                  color: buttonColor.value,
+                  borderRadius: BorderRadius.circular(6.5),
+                  border: Border.all(
+                      color: Theme.of(context).colorScheme.primary, width: height * 0.002),
                 ),
+                child: ElevatedButton(
+                    onPressed: buttonFunction,
+                    child: Text(
+                      "Submit",
+                      style: TextStyle(
+                          fontFamily: 'Renogare',
+                          color: textColor.value,
+                          fontSize:
+                              height * 0.02631578947368421052631578947368),
+                    )),
               );
             },
           ),

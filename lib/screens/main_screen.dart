@@ -1,4 +1,5 @@
 import 'package:first_web_flutter/appBar/customAppbar.dart';
+import 'package:first_web_flutter/companyProfileSection/company_profile.dart';
 import 'package:first_web_flutter/contactSection/contact_us.dart';
 import 'package:first_web_flutter/custom_scrollbar.dart';
 
@@ -82,6 +83,7 @@ class MainScreenState extends State<MainScreen> {
                 statistics(key: key2),
                 clients(),
                 projects(),
+                companyProfile(),
                 ContactUs(externalContext: context),
               ],
             );
