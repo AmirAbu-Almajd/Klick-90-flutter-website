@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/material.dart';
-
 class client extends StatefulWidget {
-  final String clientImageName;
-  const client({required this.clientImageName, Key? key}) : super(key: key);
+  final AssetImage clientImage;
+  const client({required this.clientImage, Key? key}) : super(key: key);
 
   @override
   _clientState createState() => _clientState();
@@ -48,10 +46,7 @@ class _clientState extends State<client> with SingleTickerProviderStateMixin {
                 width: height * 0.17,
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(
-                          "assets/images/Final updated list of clients/${widget.clientImageName}",
-                        ),
-                        fit: BoxFit.fill)),
+                        image: widget.clientImage, fit: BoxFit.fill)),
                 foregroundDecoration: BoxDecoration(
                   color: coloringAnimation.value,
                   backgroundBlendMode: BlendMode.saturation,

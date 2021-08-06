@@ -1,7 +1,12 @@
 import 'package:first_web_flutter/screens/main_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (kReleaseMode) {
+     CustomImageCache();
+  }
   runApp(const MyApp());
 }
 
@@ -51,5 +56,16 @@ class MyApp extends StatelessWidget {
       ),
       home: MainScreen(externalContext: context,),
     );
+  }
+}
+
+
+class CustomImageCache extends WidgetsFlutterBinding {
+  @override
+  ImageCache createImageCache() {
+    ImageCache imageCache = super.createImageCache();
+    // Set your image cache size
+    imageCache.maximumSizeBytes = 1024 * 1024 * 100; // 100 MB
+    return imageCache;
   }
 }

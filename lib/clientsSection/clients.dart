@@ -1,48 +1,42 @@
-import 'dart:html';
+// ignore_for_file: prefer_const_constructors
 
-import 'package:first_web_flutter/clientsSection/client_image.dart';
 import 'package:first_web_flutter/clientsSection/client_row_maker.dart';
 import 'package:flutter/material.dart';
 
-class clients extends StatefulWidget {
-  const clients({Key? key}) : super(key: key);
 
-  @override
-  _clientsState createState() => _clientsState();
-}
 
-class _clientsState extends State<clients> {
-  List<String> clientImages = [
-    "0.png",
-    "1.png",
-    "2.png",
-    "3.png",
-    "4.png",
-    "5.png",
-    "6.png",
-    "7.png",
-    "8.png",
-    "9.png",
-    "10.png",
-    "11.png",
-    "12.png",
-    "13.png",
-    "14.png",
-    "15.png",
-    "16.png",
-    "17.png",
-    "18.png",
-    "19.png",
-    "20.png",
-    "21.png",
-    "22.png",
-    "23.png",
-    "24.png",
-    "25.png",
-    "26.png",
-    "27.png",
-    "28.png",
-    "29.png",
+class clients  extends StatelessWidget{
+  List<AssetImage> clientImages = [
+    AssetImage("assets/images/Final updated list of clients/0.png"),
+    AssetImage("assets/images/Final updated list of clients/1.png"),
+    AssetImage("assets/images/Final updated list of clients/2.png"),
+    AssetImage("assets/images/Final updated list of clients/3.png"),
+    AssetImage("assets/images/Final updated list of clients/4.png"),
+    AssetImage("assets/images/Final updated list of clients/5.png"),
+    AssetImage("assets/images/Final updated list of clients/6.png"),
+    AssetImage("assets/images/Final updated list of clients/7.png"),
+    AssetImage("assets/images/Final updated list of clients/8.png"),
+    AssetImage("assets/images/Final updated list of clients/9.png"),
+    AssetImage("assets/images/Final updated list of clients/10.png"),
+    AssetImage("assets/images/Final updated list of clients/11.png"),
+    AssetImage("assets/images/Final updated list of clients/12.png"),
+    AssetImage("assets/images/Final updated list of clients/13.png"),
+    AssetImage("assets/images/Final updated list of clients/14.png"),
+    AssetImage("assets/images/Final updated list of clients/15.png"),
+    AssetImage("assets/images/Final updated list of clients/16.png"),
+    AssetImage("assets/images/Final updated list of clients/17.png"),
+    AssetImage("assets/images/Final updated list of clients/18.png"),
+    AssetImage("assets/images/Final updated list of clients/19.png"),
+    AssetImage("assets/images/Final updated list of clients/20.png"),
+    AssetImage("assets/images/Final updated list of clients/21.png"),
+    AssetImage("assets/images/Final updated list of clients/22.png"),
+    AssetImage("assets/images/Final updated list of clients/23.png"),
+    AssetImage("assets/images/Final updated list of clients/24.png"),
+    AssetImage("assets/images/Final updated list of clients/25.png"),
+    AssetImage("assets/images/Final updated list of clients/26.png"),
+    AssetImage("assets/images/Final updated list of clients/27.png"),
+    AssetImage("assets/images/Final updated list of clients/28.png"),
+    AssetImage("assets/images/Final updated list of clients/29.png"),
   ];
   @override
   Widget build(BuildContext context) {

@@ -74,7 +74,7 @@ class aboutPageState extends State<aboutPage>
                       "WHO ARE THE KLICKERS?",
                       style: TextStyle(
                           fontFamily: 'Renogare',
-                          fontSize: 50,
+                          fontSize: height*0.06634819747854171974981416511339,
                           color: Colors.red),
                       textAlign: TextAlign.start,
                     ),

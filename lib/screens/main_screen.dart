@@ -1,4 +1,3 @@
-
 import 'package:first_web_flutter/appBar/customAppbar.dart';
 import 'package:first_web_flutter/contactSection/contact_us.dart';
 import 'package:first_web_flutter/custom_scrollbar.dart';
@@ -13,6 +12,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
+  static List<AssetImage> caruouselImages = [
+    AssetImage('assets/images/Slider/1.jpg'),
+    AssetImage('assets/images/Slider/2.jpg'),
+    AssetImage('assets/images/Slider/3.jpg')
+  ];
   BuildContext externalContext;
   MainScreen({required this.externalContext});
   @override
@@ -24,9 +28,14 @@ class MainScreenState extends State<MainScreen> {
   static final GlobalKey key2 = GlobalKey();
   bool first = false, second = false;
   ScrollController _scrollController = new ScrollController();
-  double getScrollingPosition(double position) {
-    double height = MediaQuery.of(widget.externalContext).size.height;
-    return position / height;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // for (int i = 0; i < MainScreen.caruouselImages.length; i++) {
+    //   precacheImage(MainScreen.caruouselImages[i], context);
+    // }
   }
 
   Widget build(BuildContext context) {
@@ -57,25 +66,27 @@ class MainScreenState extends State<MainScreen> {
               second = true;
             });
           }
-          print(currentPosition);
+          // print(currentPosition);
           return true;
         },
-        child: ListView(
+        child: ListView.builder(
+          itemCount: 1,
+          // physics: NeverScrollableScrollPhysics(),
+          itemBuilder: (context, _) {
+            return Column
+            (
+              children: [
+                carousel(),
+                aboutPage(key: _key),
+                servicePage(context),
+                statistics(key: key2),
+                clients(),
+                projects(),
+                ContactUs(externalContext: context),
+              ],
+            );
+          },
           controller: _scrollController,
-          children: [
-            carousel(),
-            // videoSection(),
-            aboutPage(
-              key: _key,
-            ),
-            servicePage(context),
-            statistics(
-              key: key2,
-            ),
-            clients(),
-            projects(),
-            ContactUs(externalContext: context),
-          ],
         ),
       ),
 

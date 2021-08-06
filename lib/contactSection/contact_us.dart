@@ -65,7 +65,7 @@ class ContactUsState extends State<ContactUs>
           Text("BE A KLICKER!",
               style: TextStyle(
                   fontFamily: 'Renogare',
-                  fontSize: 40,
+                  fontSize: height*0.05307855798283337579985133209071,
                   color: Theme.of(context).colorScheme.primary)),
           SizedBox(
             height: height * 0.025,
@@ -74,6 +74,9 @@ class ContactUsState extends State<ContactUs>
           inputFieldMaker(context, emailController, "E-mail"),
           inputFieldMaker(context, mobileController, "Mobile"),
           inputFieldMaker(context, messageController, "Message"),
+          SizedBox(
+            height: height * 0.015,
+          ),
           AnimatedBuilder(
             animation: _controller,
             builder: (BuildContext context, _) {
@@ -100,13 +103,13 @@ class ContactUsState extends State<ContactUs>
                   width: width * 0.12,
                   height: height * 0.09,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
+                    color: buttonColor.value,
+                    borderRadius: BorderRadius.circular(6.5),
                     border: Border.all(
                         color: borderColor.value, width: height * 0.002),
                   ),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: buttonColor.value,
                         onPrimary: Theme.of(context).colorScheme.primary,
                       ),
                       onPressed: isDisabled ? null : printSomething,

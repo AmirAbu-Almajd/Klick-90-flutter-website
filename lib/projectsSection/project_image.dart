@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class project_image extends StatefulWidget {
   final String projectImageName;
 
-  const project_image(
-      {required this.projectImageName, Key? key})
+  const project_image({required this.projectImageName, Key? key})
       : super(key: key);
 
   @override
@@ -15,29 +15,18 @@ class project_image extends StatefulWidget {
 }
 
 class _project_imageState extends State<project_image>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation coloringAnimation;
-  late AnimationController _controller2;
-  late Animation _zoomingAnimation;
-  late AnimationStatus _status = AnimationStatus.dismissed;
+  MouseCursor myCursor = SystemMouseCursors.basic;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _controller =
         AnimationController(vsync: this, duration: Duration(milliseconds: 500));
-    _controller2 =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
     coloringAnimation = ColorTween(begin: Colors.grey, end: Colors.transparent)
         .animate(_controller);
-    _zoomingAnimation = Tween<double>(begin: 1, end: 2).animate(_controller2)
-      ..addListener(() {
-        setState(() {});
-      })
-      ..addStatusListener((status) {
-        _status = status;
-      });
   }
 
   @override
@@ -45,54 +34,51 @@ class _project_imageState extends State<project_image>
     // print(widget.zoomIndex);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return AnimatedBuilder(
-      animation: coloringAnimation,
-      builder: (BuildContext context, _) {
-        return Transform.scale(
-          alignment: FractionalOffset.center,
-          scale: _zoomingAnimation.value,
-          child: MouseRegion(
-              onEnter: (_) {
-                _controller.forward();
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: width * 0.005),
+      child: AnimatedBuilder(
+        animation: coloringAnimation,
+        builder: (BuildContext context, _) {
+          return MouseRegion(
+            cursor: myCursor,
+            onEnter: (_) {
+              setState(() {
+                myCursor = SystemMouseCursors.click;
+              });
+              _controller.forward();
+            },
+            onExit: (_) {
+              setState(() {
+                myCursor = SystemMouseCursors.basic;
+              });
+              _controller.reverse();
+            },
+            child: GestureDetector(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (buildContext) {
+                      return imageDialog(buildContext, widget.projectImageName);
+                    });
               },
-              onExit: (_) {
-                _controller.reverse();
-              },
-              child: GestureDetector(
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (buildContext) {
-                        return imageDialog(
-                            buildContext, widget.projectImageName);
-                      });
-                  // (_controller2.status == AnimationStatus.completed)
-                  //     ? _controller2.reverse()
-                  //     : _controller2.forward();
-                },
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: width * 0.005),
-                  height: height * 0.3,
-                  width: height * 0.3,
-                  foregroundDecoration: BoxDecoration(
-                    color: coloringAnimation.value,
-                    backgroundBlendMode: BlendMode.saturation,
-                  ),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage(
-                            "assets/images/projects/${widget.projectImageName}",
-                          ),
-                          fit: BoxFit.fill)),
-                  child: Image.asset(
-                    "assets/images/projects/${widget.projectImageName}",
-                    height: height * 0.15,
-                    width: height * 0.15,
-                  ),
+              child: Container(
+                height: height * 0.3,
+                width: height * 0.3,
+                foregroundDecoration: BoxDecoration(
+                  color: coloringAnimation.value,
+                  backgroundBlendMode: BlendMode.saturation,
                 ),
-              )),
-        );
-      },
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(
+                          "assets/images/projects/${widget.projectImageName}",
+                        ),
+                        fit: BoxFit.fill)),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
