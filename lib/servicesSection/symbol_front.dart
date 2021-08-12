@@ -16,7 +16,7 @@ Container symbolFront(
                     image: AssetImage("assets/images/Services/${imageName}"),
                     fit: BoxFit.scaleDown),
                 borderRadius: BorderRadius.circular(15))),
-        Text(
+        SelectableText(
           serviceName,
           style: TextStyle(
               fontSize: height * 0.025,

@@ -23,7 +23,7 @@ Transform symbolBack(
       child: Center(
         child: Column(
           children: [
-            Text(
+            SelectableText(
               serviceName,
               style: TextStyle(
                   fontSize: height * 0.025,
@@ -34,7 +34,7 @@ Transform symbolBack(
             SizedBox(
               height: height * 0.006,
             ),
-            Text(
+            SelectableText(
               serviceDescription,
             
               style: TextStyle(  

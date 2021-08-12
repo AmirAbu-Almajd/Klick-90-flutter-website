@@ -26,6 +26,7 @@ class _clientState extends State<client> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    double area = height * width;
     return Row(
       children: [
         SizedBox(
@@ -42,8 +43,9 @@ class _clientState extends State<client> with SingleTickerProviderStateMixin {
                 _controller.reverse();
               },
               child: Container(
-                height: height * 0.17,
-                width: height * 0.17,
+                margin: EdgeInsets.symmetric(horizontal: height * 0.02,vertical: height * 0.02),
+                height: width * 0.1,
+                width: width * 0.1,
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: widget.clientImage, fit: BoxFit.fill)),

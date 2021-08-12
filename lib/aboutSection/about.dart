@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:first_web_flutter/screens/main_screen.dart';
 import 'package:first_web_flutter/aboutSection/aboutPageText.dart';
 import 'package:flutter/material.dart';
 
@@ -52,47 +50,65 @@ class aboutPageState extends State<aboutPage>
 
     return Container(
       color: Colors.white,
-      child: Container(
-        width: width,
-        height: height - (height * 0.12),
-        padding: EdgeInsets.symmetric(
-          vertical: height * 0.15,horizontal: width*0.15
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SlideTransition(
-              position: myOffset,
-              child: AnimatedBuilder(
-                animation: _textFadingAnimation,
-                builder: (BuildContext context, _) {
-                  return Opacity(
-                    // opacity: 1,
-                    opacity: _textFadingAnimation.value,
-                    child: SelectableText(
-                      "WHO ARE THE KLICKERS?",
-                      style: TextStyle(
-                          fontFamily: 'Renogare',
-                          fontSize: height*0.06634819747854171974981416511339,
-                          color: Colors.red),
-                      textAlign: TextAlign.start,
-                    ),
-                  );
-                },
-              ),
-            ),
-            Container(
-                child: AnimatedOpacity(
-              // opacity: 0,
-              opacity: _opacity,
-              duration: Duration(milliseconds: 2000),
-              child: myTexts(context),
-            ))
-          ],
-        ),
-      ),
       width: width,
-      height: height * 0.92,
+      height: (width < 800) ? null : (height * 0.92),
+      padding: EdgeInsets.symmetric(
+          vertical: height * 0.15, horizontal: width * 0.15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SlideTransition(
+            position: myOffset,
+            child: AnimatedBuilder(
+              animation: _textFadingAnimation,
+              builder: (BuildContext context, _) {
+                return Opacity(
+                  // opacity: 1,
+                  opacity: _textFadingAnimation.value,
+                  child: SelectableText(
+                    "WHO ARE THE KLICKERS?",
+                    style: TextStyle(
+                        fontFamily: 'Renogare',
+                        fontSize: (width < 800)
+                            ? width * 0.075
+                            : height * 0.06634819747854171974981416511339,
+                        color: Colors.red),
+                    textAlign:
+                        (width < 800) ? TextAlign.center : TextAlign.start,
+                  ),
+                );
+              },
+            ),
+          ),
+          Container(
+              width: width,
+              child: AnimatedOpacity(
+                // opacity: 0,
+                opacity: _opacity,
+                duration: Duration(milliseconds: 1200),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: height * 0.03,
+                    ),
+                    SelectableText(
+                      "\nWe are redheaded, definitely hardheaded.\n",
+                      style: TextStyle(
+                        fontFamily: 'Renogare',
+                        fontWeight: FontWeight.bold,
+                        fontSize:
+                            (width < 800) ? width * 0.05 : height * 0.0236,
+                      ),
+                      textAlign:
+                          (width < 800) ? TextAlign.center : TextAlign.start,
+                    ),
+                    myTexts(context),
+                  ],
+                ),
+              ))
+        ],
+      ),
     );
   }
 }

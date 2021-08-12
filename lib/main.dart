@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kReleaseMode) {
-     CustomImageCache();
+    CustomImageCache();
   }
   runApp(const MyApp());
 }
@@ -21,6 +21,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         primaryColor: Colors.white,
+        scrollbarTheme: ScrollbarThemeData(
+            thumbColor:
+                MaterialStateProperty.all(Color.fromARGB(255, 237, 28, 36))),
         highlightColor: Color.fromARGB(255, 237, 28, 36),
         colorScheme: const ColorScheme(
           primary: Color.fromARGB(255, 237, 28, 36),
@@ -54,11 +57,13 @@ class MyApp extends StatelessWidget {
               fontFamily: 'Renogare', fontSize: 10, color: Colors.black),
         ),
       ),
-      home: MainScreen(externalContext: context,),
+      debugShowCheckedModeBanner: false,
+      home: MainScreen(
+        externalContext: context,
+      ),
     );
   }
 }
-
 
 class CustomImageCache extends WidgetsFlutterBinding {
   @override

@@ -16,8 +16,12 @@ class _carouselState extends State<carousel> {
     AssetImage('assets/images/Slider/2.jpg'),
     AssetImage('assets/images/Slider/3.jpg')
   ];
-
-
+  List<AssetImage> caruouselMobileImages = [
+    AssetImage('assets/images/mobile slider/1.jpg'),
+    AssetImage('assets/images/mobile slider/2.jpg'),
+    AssetImage('assets/images/mobile slider/3.jpg'),
+    AssetImage('assets/images/mobile slider/4.jpg'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -38,18 +42,31 @@ class _carouselState extends State<carousel> {
         enlargeCenterPage: true,
         scrollDirection: Axis.horizontal,
       ),
-      items: caruouselImages.map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return Container(
-                width: width,
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    image: DecorationImage(image: i, fit: BoxFit.cover)));
-          },
-        );
-      }).toList(),
+      items: (width <= 800)
+          ? caruouselMobileImages.map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                      width: width,
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          image: DecorationImage(image: i, fit: BoxFit.cover)));
+                },
+              );
+            }).toList()
+          : caruouselImages.map((i) {
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                      width: width,
+                      margin: EdgeInsets.symmetric(horizontal: 5.0),
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          image: DecorationImage(image: i, fit: BoxFit.cover)));
+                },
+              );
+            }).toList(),
     );
     return Container(
       height: height - (height * 0.12),

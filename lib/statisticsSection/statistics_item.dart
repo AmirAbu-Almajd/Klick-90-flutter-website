@@ -6,8 +6,7 @@ class statisticItem extends StatefulWidget {
   Animation animation;
   int finalValue;
   statisticItem(
-      {
-      required this.animation,
+      {required this.animation,
       required this.finalValue,
       required this.statisticIcon,
       required this.statisticTitle,
@@ -29,9 +28,13 @@ class _statisticItemState extends State<statisticItem> {
       children: [
         Container(
             height: height * 0.12,
-            width: (widget.statisticTitle == "Drunk Ideas")
-                ? width * 0.05
-                : width * 0.073,
+            width: (width < 800)
+                ? (widget.statisticTitle == "Drunk Ideas")
+                    ? height * 0.075
+                    : height * 0.1
+                : (widget.statisticTitle == "Drunk Ideas")
+                    ? width * 0.05
+                    : width * 0.073,
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(

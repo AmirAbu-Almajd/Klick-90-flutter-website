@@ -3,6 +3,7 @@ import 'package:first_web_flutter/contactSection/contact_icon.dart';
 import 'package:first_web_flutter/contactSection/input_maker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 class ContactUs extends StatefulWidget {
@@ -23,9 +24,6 @@ class ContactUsState extends State<ContactUs>
   TextEditingController messageController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
   late Animation textColor;
-  String userEmail = 'amirelbe7ar4@gmail.com';
-  String password = 'heroicmail';
-  String recepientEmail = 'karim@klick90.com';
   dynamic buttonFunction = null;
   void isEmpty() {
     if (nameController.text.toString() != "" &&
@@ -66,6 +64,12 @@ class ContactUsState extends State<ContactUs>
           }
         }),
         headers: {'Content-Type': 'application/json'});
+    setState(() {
+      emailController.text = "";
+      nameController.text = "";
+      messageController.text = "";
+      mobileController.text = "";
+    });
     print(response.body);
   }
 
@@ -96,13 +100,12 @@ class ContactUsState extends State<ContactUs>
     bool isDisabled = true;
     return Container(
       width: width * 0.9,
-      height: height - (height * 0.12),
       child: Column(
         children: [
           SizedBox(
             height: height * 0.067,
           ),
-          Text("BE A KLICKER!",
+          SelectableText("BE A KLICKER!",
               style: TextStyle(
                   fontFamily: 'Renogare',
                   fontSize: height * 0.05307855798283337579985133209071,
@@ -132,25 +135,40 @@ class ContactUsState extends State<ContactUs>
           AnimatedBuilder(
             animation: _controller,
             builder: (BuildContext context, _) {
-              return Container(
-                width: width * 0.12,
-                height: height * 0.09,
-                decoration: BoxDecoration(
-                  color: buttonColor.value,
-                  borderRadius: BorderRadius.circular(6.5),
-                  border: Border.all(
-                      color: Theme.of(context).colorScheme.primary, width: height * 0.002),
+              return MouseRegion(
+                onHover: (_) {
+                  if (buttonFunction == null) {
+                    _controller.forward();
+                  }
+                },
+                onExit: (_) {
+                  if (buttonFunction == null) {
+                    _controller.reverse();
+                  }
+                },
+                child: Container(
+                  width: (width<800)?null:width * 0.12,
+                  height: height * 0.09,
+                  decoration: BoxDecoration(
+                    color: buttonColor.value,
+                    borderRadius: BorderRadius.circular(6.5),
+                    border: Border.all(
+                        color: Theme.of(context).colorScheme.primary,
+                        width: height * 0.002),
+                  ),
+                  child: ElevatedButton(
+                      onPressed: buttonFunction,
+                      style: ElevatedButton.styleFrom(
+                        disabledMouseCursor: SystemMouseCursors.basic,
+                      ),
+                      child: SelectableText(
+                        "Submit",
+                        style: TextStyle(
+                            fontFamily: 'Renogare',
+                            color: textColor.value,
+                            fontSize: (width<800)?width*0.035:width * 0.013),
+                      )),
                 ),
-                child: ElevatedButton(
-                    onPressed: buttonFunction,
-                    child: Text(
-                      "Submit",
-                      style: TextStyle(
-                          fontFamily: 'Renogare',
-                          color: textColor.value,
-                          fontSize:
-                              height * 0.02631578947368421052631578947368),
-                    )),
               );
             },
           ),
@@ -173,10 +191,13 @@ class ContactUsState extends State<ContactUs>
               width: width * 0.01,
             ),
             iconButton(
-              iconName: "email.png",
+              iconName: "mail.png",
               url: "https://www.instagram.com/klick.90/",
             ),
-          ])
+          ]),
+          SizedBox(
+            height: height * 0.067,
+          ),
         ],
       ),
     );

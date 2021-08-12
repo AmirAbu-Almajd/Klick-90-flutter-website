@@ -35,7 +35,10 @@ class _project_imageState extends State<project_image>
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: width * 0.005),
+      margin: EdgeInsets.symmetric(
+        horizontal: width * 0.005,
+        vertical: width * 0.005,
+      ),
       child: AnimatedBuilder(
         animation: coloringAnimation,
         builder: (BuildContext context, _) {

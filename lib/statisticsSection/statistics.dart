@@ -3,7 +3,17 @@ import 'package:flutter/material.dart';
 
 class statistics extends StatefulWidget {
   static bool done = false;
-  const statistics({Key? key}) : super(key: key);
+  List<String> statisticsTitles;
+  bool mobile;
+  List<int> countingValues;
+  List<String> statisticsIcons;
+  statistics(
+      {required this.mobile,
+      required this.countingValues,
+      required this.statisticsTitles,
+      required this.statisticsIcons,
+      Key? key})
+      : super(key: key);
 
   @override
   statisticsState createState() => statisticsState();
@@ -16,19 +26,6 @@ class statisticsState extends State<statistics>
   late Animation countingAnimation2;
   late Animation countingAnimation3;
   late Animation countingAnimation4;
-  late List<int> countingValues = [34, 54, 69, 1000];
-  late List<String> statisticsIcons = [
-    "campaign icon.png",
-    "Projects finished final.png",
-    "client icon.png",
-    "drunk icon.png"
-  ];
-  late List<String> statisticsTitles = [
-    "Social Campaigns",
-    "Projects Finished",
-    "Satisfied Clients",
-    "Drunk Ideas"
-  ];
   void startCounting() {
     _controller.forward();
   }
@@ -39,20 +36,20 @@ class statisticsState extends State<statistics>
     super.initState();
     _controller = AnimationController(
         vsync: this, duration: Duration(milliseconds: 2000));
-    countingAnimation = IntTween(begin: 0, end: countingValues[0])
+    countingAnimation = IntTween(begin: 0, end: widget.countingValues[0])
         .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
-    countingAnimation2 = IntTween(begin: 0, end: countingValues[1])
+    countingAnimation2 = IntTween(begin: 0, end: widget.countingValues[1])
         .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
-    countingAnimation3 = IntTween(begin: 0, end: countingValues[2])
+    countingAnimation3 = IntTween(begin: 0, end: widget.countingValues[2])
         .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
-    countingAnimation4 = IntTween(begin: 0, end: countingValues[3])
+    countingAnimation4 = IntTween(begin: 0, end: widget.countingValues[3])
         .animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         setState(() {
           statistics.done = true;
         });
-        print(status);
+        // print(status);
       }
     });
   }
@@ -85,36 +82,76 @@ class statisticsState extends State<statistics>
                       Colors.black.withOpacity(0.6), BlendMode.dstATop),
                   image: AssetImage("assets/images/statisticsBG.jpg"),
                   fit: BoxFit.cover)),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              statisticItem(
-                  // done: done,
-                  statisticIcon: statisticsIcons[0],
-                  statisticTitle: statisticsTitles[0],
-                  animation: countingAnimation,
-                  finalValue: countingValues[0]),
-              statisticItem(
-                  // done: done,
-                  statisticIcon: statisticsIcons[1],
-                  statisticTitle: statisticsTitles[1],
-                  animation: countingAnimation2,
-                  finalValue: countingValues[1]),
-              statisticItem(
-                  // done: done,
-                  statisticIcon: statisticsIcons[2],
-                  statisticTitle: statisticsTitles[2],
-                  animation: countingAnimation3,
-                  finalValue: countingValues[2]),
-              statisticItem(
-                  // done: done,
-                  statisticIcon: statisticsIcons[3],
-                  statisticTitle: statisticsTitles[3],
-                  animation: countingAnimation4,
-                  finalValue: countingValues[3]),
-            ],
-          ),
+          child: (widget.mobile)
+              ? Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        statisticItem(
+                            // done: done,
+                            statisticIcon: widget.statisticsIcons[0],
+                            statisticTitle: widget.statisticsTitles[0],
+                            animation: countingAnimation,
+                            finalValue: widget.countingValues[0]),
+                        statisticItem(
+                            // done: done,
+                            statisticIcon: widget.statisticsIcons[1],
+                            statisticTitle: widget.statisticsTitles[1],
+                            animation: countingAnimation2,
+                            finalValue: widget.countingValues[1]),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        statisticItem(
+                            // done: done,
+                            statisticIcon: widget.statisticsIcons[2],
+                            statisticTitle: widget.statisticsTitles[2],
+                            animation: countingAnimation3,
+                            finalValue: widget.countingValues[2]),
+                        statisticItem(
+                            // done: done,
+                            statisticIcon: widget.statisticsIcons[3],
+                            statisticTitle: widget.statisticsTitles[3],
+                            animation: countingAnimation4,
+                            finalValue: widget.countingValues[3]),
+                      ],
+                    ),
+                  ],
+                )
+              : Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    statisticItem(
+                        // done: done,
+                        statisticIcon: widget.statisticsIcons[0],
+                        statisticTitle: widget.statisticsTitles[0],
+                        animation: countingAnimation,
+                        finalValue: widget.countingValues[0]),
+                    statisticItem(
+                        // done: done,
+                        statisticIcon: widget.statisticsIcons[1],
+                        statisticTitle: widget.statisticsTitles[1],
+                        animation: countingAnimation2,
+                        finalValue: widget.countingValues[1]),
+                    statisticItem(
+                        // done: done,
+                        statisticIcon: widget.statisticsIcons[2],
+                        statisticTitle: widget.statisticsTitles[2],
+                        animation: countingAnimation3,
+                        finalValue: widget.countingValues[2]),
+                    statisticItem(
+                        // done: done,
+                        statisticIcon: widget.statisticsIcons[3],
+                        statisticTitle: widget.statisticsTitles[3],
+                        animation: countingAnimation4,
+                        finalValue: widget.countingValues[3]),
+                  ],
+                ),
         ),
       ],
     );
